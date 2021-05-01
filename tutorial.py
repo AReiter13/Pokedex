@@ -1,12 +1,9 @@
 from flask import Flask, redirect, url_for, render_template
-import requests, re, time
-from torch import nn, optim
-from torchvision import datasets, models, transforms
-import matplotlib.pyplot as plt
-from google.colab import files
+from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__)
 
+run_with_ngrok(app)
 
 @app.route("/")
 def home():
@@ -14,7 +11,6 @@ def home():
 
 @app.route("/predict/")
 def predict():
-    
     return f"predicting"
 
 @app.route("/growlithe/")

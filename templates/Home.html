@@ -62,10 +62,9 @@ div:hover {
 <div class="myDiv2"> <h3>Please insert an image of a Pokémon</h3></div>
 <br>
 
-<form action="next.php" method="post" enctype="multipart/form-data">
-    <label for="image">Image:</label>
-    <input type="image" name="image" id="image" /><br />
-    <input type="submit" name="submit" value="Submit" />
+<form action="/predict">
+  <input type="file" id="myFile" name="filename">
+  <input type="submit">
 </form>
   
 <br><br>
