@@ -35,20 +35,25 @@ def home():
 
 @app.route("/predict/")
 def predict():
-    pred = makePrediction(Image.open('websitestuff/Growlithe.png')).item()+1
+    pred = makePrediction(Image.open('websitestuff/Pikachu.png')).item()+1
     if pred == 58:
       return redirect(url_for("growlithe"))
     else:
-      return redirect(url_for("notGrowlithe"))
+      return redirect(url_for("rattata"))
     
 
 @app.route("/growlithe/")
 def growlithe():
     return render_template("Growlithe.html")
 
-@app.route("/notGrowlithe")
-def notGrowlithe():
-    return f"not Growlithe"
+@app.route("/rattata/")
+def rattata():
+    return render_template("Rattata.html")
+
+@app.route("/ppp/")
+def ppp():
+    return render_template("Rattata.html")
+
 
 if __name__ == "__main__": 
     app.run()
