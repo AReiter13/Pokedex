@@ -18,6 +18,11 @@ model.load_state_dict(torch.load('websitestuff/model'))
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
+ALLOWED_FILES = {'jpg', 'jpeg'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_FILES
+
 def makePrediction(image):
   xform = transforms.Compose([transforms.Resize((224,224)), transforms.ToTensor(), torchvision.transforms.RandomHorizontalFlip(p=0.5)])
   image = xform(image).to(device)
@@ -34,12 +39,19 @@ run_with_ngrok(app)
 @app.route("/", methods=["POST", "GET"])
 def home():
     if request.method == "POST":
-      img = request.files["im"]
-      pred = makePrediction(Image.open(img)).item()+1
-      if pred == 58:
-        return redirect(url_for("growlithe"))
+      if 'im' not in request.files:
+            return render_template("Home.html")
+      img = request.files['im']
+      if img.filename == '':
+            return render_template("Home.html")
+      if img and allowed_file(img.filename):
+            pred = makePrediction(Image.open(img)).item()+1
+            if pred == 58:
+                return redirect(url_for("growlithe"))
+            else:
+                return redirect(url_for("rattata"))
       else:
-        return redirect(url_for("rattata"))
+            return render_template("Home.html")
     else:
       return render_template("Home.html")
     
