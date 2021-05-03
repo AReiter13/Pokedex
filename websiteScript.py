@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
 from flask_ngrok import run_with_ngrok
 import requests, re, time
 import torch, torchvision
@@ -6,7 +6,9 @@ from torch import nn, optim
 from torchvision import datasets, models, transforms
 import matplotlib.pyplot as plt
 from google.colab import files
-from PIL import Image 
+from PIL import Image
+import numpy
+import cv2
 
 device = torch.device('cuda:0') 
 model = models.resnet50(pretrained=True)
@@ -29,17 +31,17 @@ app = Flask(__name__)
 
 run_with_ngrok(app)
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def home():
-    return render_template("Home.html")
-
-@app.route("/predict/")
-def predict():
-    pred = makePrediction(Image.open('websitestuff/Pikachu.png')).item()+1
-    if pred == 58:
-      return redirect(url_for("growlithe"))
+    if request.method == "POST":
+      img = request.files["im"]
+      pred = makePrediction(Image.open(img)).item()+1
+      if pred == 58:
+        return redirect(url_for("growlithe"))
+      else:
+        return redirect(url_for("rattata"))
     else:
-      return redirect(url_for("rattata"))
+      return render_template("Home.html")
     
 
 @app.route("/growlithe/")
@@ -52,7 +54,7 @@ def rattata():
 
 @app.route("/ppp/")
 def ppp():
-    return render_template("Rattata.html")
+    return render_template("pokemon.html")
 
 
 if __name__ == "__main__": 
