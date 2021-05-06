@@ -7,25 +7,41 @@
 h1 {
 	text-align: center;
     font-family: "Righteous";
-    font-size: 400%;
+    font-size: 300%;
+  color:	black;
 }
-p {
+h2 {
 	text-align: center;
     font-family: "Righteous";
+    font-size: 200%;
+  color:	black;
 }
 
 .myDiv {
-  border: 19px outset gray;
-  background-color: #86a9b5;    
+  border: 10px outset gray;
+  background-color: #ffdab9;    
+  text-align: center;
+  border-radius: 25px;
+  margin: 20px 100px 20px 100px;
+  transition: width 2s;
+}
+.myDiv2 {
+  background-color: 	#f4a460;    
   text-align: center;
   border-radius: 15px;
-  margin: 80px 100px 50px 100px;
+  margin: 10px 50px 10px 50px;
   transition: width 2s;
+ 
+}
+.myDiv3 {
+  background-color: 	#ffdab9;    
+  text-align: center;
+  border-radius: 15px;
+  transition: width 10s;
 }
 
 body{
-
-    background-color:crimson;
+  background-color:crimson;
 }
 
 div:hover {
@@ -40,22 +56,19 @@ div:hover {
 <div class="myDiv">
 
 <h1>Pokédex</h1>
-<p>CPEN 291 Final Machine Learning Project</p>
-<p>Team Tyrannosaurus</p>
 
+<h2>Team Tyrannosaurus</h2>
+
+<div class="myDiv2"> <h3>Please insert an image of a Pokémon</h3></div>
 <br>
-<p>Please sumbit a JPEG image of a Pokémon</p>
+
 <form action="#" method="post" enctype="multipart/form-data">
   <input type="file" name="im">
   <input type="submit" value="submit">
 </form>
-
-<br>
-<br>
-
-</div>
+  
+<br><br>
 
 
 </body>
 </html>
-
