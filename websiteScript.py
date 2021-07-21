@@ -14,7 +14,7 @@ device = torch.device('cuda:0')
 model = models.resnet50(pretrained=True)
 model.fc = nn.Linear(model.fc.in_features, 75)
 model.to(device)
-model.load_state_dict(torch.load('websitestuff/model'))
+model.load_state_dict(torch.load('Pokedex/model'))
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
